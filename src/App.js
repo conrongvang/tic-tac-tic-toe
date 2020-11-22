@@ -16,6 +16,11 @@ class App extends React.Component {
       css: "square",
     };
   }
+  shouldComponentUpdate() {
+    return true
+  }
+
+
   handleClick(i) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
@@ -26,6 +31,16 @@ class App extends React.Component {
       history: history.concat([{squares: squares,}]),
       xIsNext: !this.state.xIsNext,
       stepNumber: history.length,
+    }, () => {
+      const history = this.state.history.slice(0, this.state.stepNumber + 1);
+      const current = history[history.length - 1];
+      const squares = current.squares.slice();
+      console.log("xxxx", this.calculateWinner(squares))
+      if (this.calculateWinner(squares)) {
+        this.setState({
+          css: "square-win"
+        })
+      }
     });
   }
   jumpTo(step) {
@@ -57,10 +72,10 @@ class App extends React.Component {
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-        const css = "square-win";
-        this.setState({
-          css: css,
-        });
+        // const css = "square-win";
+        // this.setState({
+        //   css: css,
+        // });
         return squares[a];
       }
     }
