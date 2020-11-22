@@ -14,6 +14,7 @@ class App extends React.Component {
       xIsNext: true,
       stepNumber: 0,
       css: "square",
+      arr: []
     };
   }
   shouldComponentUpdate() {
@@ -76,6 +77,8 @@ class App extends React.Component {
         // this.setState({
         //   css: css,
         // });
+        console.log("xx",a,b,c)
+        this.state.arr.push(a,b,c)
         return squares[a];
       }
     }
@@ -109,7 +112,7 @@ class App extends React.Component {
     return (
       <div className="game">
         <div className="game-board">
-          <Board square={this.calculateWinner(current.squares.slice())} squares={current.squares} onClick={(i) => this.handleClick(i)}/>
+          <Board arr={this.state.arr}  squares={current.squares} onClick={(i) => this.handleClick(i)}/>
         </div>
         <div className="game-info">
           <div className="status">{status}</div>
