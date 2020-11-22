@@ -32,15 +32,15 @@ class App extends React.Component {
       xIsNext: !this.state.xIsNext,
       stepNumber: history.length,
     }, () => {
-      const history = this.state.history.slice(0, this.state.stepNumber + 1);
-      const current = history[history.length - 1];
-      const squares = current.squares.slice();
-      console.log("xxxx", this.calculateWinner(squares))
-      if (this.calculateWinner(squares)) {
-        this.setState({
-          css: "square-win"
-        })
-      }
+      // const history = this.state.history.slice(0, this.state.stepNumber + 1);
+      // const current = history[history.length - 1];
+      // const squares = current.squares.slice();
+      // console.log("xxxx", this.calculateWinner(squares))
+      // if (this.calculateWinner(squares)) {
+      //   this.setState({
+      //     css: "square-win"
+      //   })
+      // }
     });
   }
   jumpTo(step) {
@@ -109,7 +109,7 @@ class App extends React.Component {
     return (
       <div className="game">
         <div className="game-board">
-          <Board square={this.state.css} squares={current.squares} onClick={(i) => this.handleClick(i)}/>
+          <Board square={this.calculateWinner(current.squares.slice())} squares={current.squares} onClick={(i) => this.handleClick(i)}/>
         </div>
         <div className="game-info">
           <div className="status">{status}</div>
